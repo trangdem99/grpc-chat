@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package conversations;
+
+message newConversationRequest {
+
+}
+
+message newConversationResponse {
+  bool success = 1;
+  string msg = 2;
+}
+
+message addAccountRequest {
+  string _id = 1;
+  string account = 2;
+}
+
+message addAccountResponse {
+  bool success = 1;
+  string msg = 2;
+}
+
+message removeAccountRequest {
+  string _id = 1;
+  string account = 2;
+}
+
+message removeAccountResponse {
+  bool success = 1;
+  string msg = 2;
+}
+
+message sendRequest {
+  string _id = 1;
+  string message = 2;
+}
+
+message sendResponse {
+  bool success = 1;
+  string msg = 2;
+}
+
+message streamRequest {
+
+}
+
+message streamResponse {
+  string data = 1;
+}
+
+
+message listRequest {}
+
+message listResponse {
+  bool success = 1;
+  string msg = 2;
+  string data = 3;
+}
+
+service Conversations {
+  rpc newConversation(newConversationRequest) returns (newConversationResponse) {}
+  rpc addAccount(addAccountRequest) returns (addAccountResponse) {}
+  rpc removeAccount(removeAccountRequest) returns (removeAccountResponse) {}
+  rpc send(sendRequest) returns (sendResponse) {}
+  rpc stream(streamRequest) returns (stream streamResponse) {}
+  rpc list(listRequest) returns (listResponse) {}
+}

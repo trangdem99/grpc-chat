@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package models;
+
+message Account {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message Token {
+  string token = 1;
+}
+
+message Empty {
+}
+
+message Message {
+  string _id = 1;
+  string message = 2;
+}
+
+message SearchAccount {
+  string username = 1;
+}
+
+message AddOrRemoveAccount {
+  string _id = 1;
+  string account = 2;
+}

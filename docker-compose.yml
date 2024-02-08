@@ -1,0 +1,60 @@
+version: '3.7'
+
+services:
+  envoy:
+    container_name: 'grpc_envoy'
+    image: envoyproxy/envoy:v1.29-latest
+    volumes:
+      - ./docker/envoy.yaml:/etc/envoy/envoy.yaml
+    ports:
+      - '9901:9901'
+      - '8080:8080'
+    networks:
+      - grpc_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10k"
+        max-file: "3"
+  node:
+    container_name: 'grpc_node'
+    build: './'
+    volumes:
+      - ./src/:/var/www/html/
+    ports:
+      - '3000:3000'
+      - '5000:5000'
+      - '50051:50051'
+    working_dir: /var/www/html/
+    command: npm run dev
+    # depends_on:
+    #   - mongo
+    networks:
+      - grpc_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10k"
+        max-file: "3"
+  # mongo:
+  #   container_name: 'grpc_mongo'
+  #   image: mongo:latest
+  #   volumes:
+  #     - ./docker/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+  #   ports:
+  #     - '27017:27017'
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: 123456
+  #     MONGO_INITDB_DATABASE: 'grpc'
+  #   networks:
+  #     - grpc_network
+  #   logging:
+  #     driver: "json-file"
+  #     options:
+  #       max-size: "10k"
+  #       max-file: "3"
+
+networks:
+  grpc_network:
+    driver: bridge

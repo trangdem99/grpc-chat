@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package accounts;
+
+message getProfileRequest {
+  
+}
+
+message getProfileResponse {
+  bool success = 1;
+  string msg = 2;
+  string data = 3;
+}
+
+message searchRequest {
+  string username = 1;
+}
+
+message searchResponse {
+  bool success = 1;
+  string msg = 2;
+  string data = 3;
+}
+
+service Accounts {
+  rpc getProfile(getProfileRequest) returns (getProfileResponse) {}
+  rpc searchAccount(searchRequest) returns (searchResponse) {}
+}

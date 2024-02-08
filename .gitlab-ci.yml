@@ -1,0 +1,47 @@
+# You can override the included template(s) by including variable overrides
+# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
+# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
+# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
+# Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+
+# # Template for jobs for production.
+# image: docker:latest
+
+# services:
+#   - docker:dind
+
+# stages:
+#   - build
+#   - test
+#   - deploy
+
+# before_script:
+#   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY 
+
+# build:
+#   stage: build
+#   script:
+#     - docker-compose build
+#     - docker-compose push
+
+# test:
+#   stage: test
+#   script:
+#     - docker-compose up -d
+
+# deploy:
+#   stage: deploy
+#   script:
+#     - docker-compose pull
+#     - docker-compose up -d
+
+# # Template for jobs for develop.
+stages:
+- test
+sast:
+  stage: test
+include:
+- template: Security/SAST.gitlab-ci.yml
+

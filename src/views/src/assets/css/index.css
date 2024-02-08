@@ -1,0 +1,38 @@
+/* Code by trangdem99 - Nguyen Huynh */
+
+body {
+  background-color: #282f53;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.form-auth {
+  width: 100%;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-auth .checkbox {
+  font-weight: 400;
+}
+
+.form-auth .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-auth input[type="text"] {
+  margin-bottom: 10px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-auth input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
